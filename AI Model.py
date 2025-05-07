@@ -14,11 +14,9 @@ with open(data_path, 'r') as file:
 X = data['features']
 y = data['labels']
 
-# Train the model
 model = DecisionTreeClassifier()
 model.fit(X, y)
 
-# Save the model
 model_file = os.path.join(os.path.dirname(__file__), 'channel_predictor.joblib')
 joblib.dump(model, model_file)
 
@@ -38,23 +36,14 @@ def push_channel_to_meraki(api_key, ap_serial, channel):
     response = requests.put(url, headers=headers, json=payload)
     print("Meraki API response:", response.status_code, response.text)
 
-# Example test and push
 if __name__ == "__main__":
-    test_input = [70, 22, 20, 250, 1, 1]
     prediction = predict_channel(test_input)
     print("Recommended Channel:", prediction)
 
-    # Replace with actual values
     API_KEY = "YOUR_API_KEY"
     AP_SERIAL = "YOUR_AP_SERIAL"
 
     push_channel_to_meraki(API_KEY, AP_SERIAL, prediction)
-"""
 
-# Save updated script
-updated_model_path = "/mnt/data/Meraki-AI-Channel-Optimizer/ml_model/train_and_push.py"
-with open(updated_model_path, "w") as f:
-    f.write(full_script_with_push)
 
-updated_model_path
 
