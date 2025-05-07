@@ -1,24 +1,6 @@
 #code to get data from Meraki dashborad 
 #This is including the following: wireless status, channel utilization, number of client, signal Quality, Health Metrics 
 import os
-
-# Recreate project structure since execution environment was reset
-base_path = "/mnt/data/Meraki-AI-Channel-Optimizer"
-folders = [
-    "api",
-    "ml_model",
-    "meraki",
-    "data",
-    "logs"
-]
-
-for folder in folders:
-    os.makedirs(os.path.join(base_path, folder), exist_ok=True)
-
-# Recreate and write updated Meraki metrics script
-script_path = os.path.join(base_path, "meraki/get_metrics.py")
-
-health_script = """\
 import requests
 
 API_KEY = "YOUR_API_KEY"
@@ -63,9 +45,8 @@ if __name__ == "__main__":
     metrics = fetch_all_metrics()
     print("Aggregated Wireless Metrics (for AI input):")
     print(metrics)
-"""
+
 
 with open(script_path, "w") as f:
     f.write(health_script)
 
-script_path
